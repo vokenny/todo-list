@@ -1,9 +1,9 @@
 class StorageService {
   /*
   Responsibilities:
-    1. Direct access to LocalStorage
-    2. CRUD on LocalStorage
-    3. Everything must come through this layer to CRUD on LocalStorage
+    1. Direct access to localStorage
+    2. CRUD on localStorage
+    3. Everything must come through this layer to CRUD on localStorage
   */
 
   #storage: Storage;

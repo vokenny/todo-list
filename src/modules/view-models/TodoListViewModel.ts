@@ -3,8 +3,7 @@ import TodoItem from '../models/TodoItem';
 
 export class TodoListViewModel {
   /*
-  Responsibilities:
-    1. Use the StorageService to perform CRUD operations on the TodoItems
+  Performs CRUD operations on the TodoItems via StorageService.
   */
 
   #storage: StorageService;
