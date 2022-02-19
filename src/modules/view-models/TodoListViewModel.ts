@@ -1,7 +1,7 @@
 import StorageService from '../services/StorageService';
-import TodoItem from './TodoItem';
+import TodoItem from '../models/TodoItem';
 
-export class TodoList {
+export class TodoListViewModel {
   /*
   Responsibilities:
     1. Use the StorageService to perform CRUD operations on the TodoItems
