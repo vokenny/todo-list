@@ -1,7 +1,12 @@
 import StorageService from '../services/StorageService';
-import { TodoItem } from './TodoItem';
+import TodoItem from './TodoItem';
 
 export class TodoList {
+  /*
+  Responsibilities:
+    1. Use the StorageService to perform CRUD operations on the TodoItems
+  */
+
   #storage: StorageService;
 
   constructor() {
