@@ -1,4 +1,5 @@
-const hello = document.createElement('h1');
-hello.textContent = 'Omg I did it!';
+import TodoListView from './modules/views/TodoListView';
 
-document.body.append(hello);
+const todoListView = new TodoListView();
+
+todoListView.showTodoList();

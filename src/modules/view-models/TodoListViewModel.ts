@@ -1,7 +1,7 @@
 import StorageService from '../services/StorageService';
 import TodoItem from '../models/TodoItem';
 
-export class TodoListViewModel {
+export default class TodoListViewModel {
   /*
   Performs CRUD operations on the TodoItems via StorageService.
   */

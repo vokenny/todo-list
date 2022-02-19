@@ -1,4 +1,4 @@
-class StorageService {
+export default class StorageService {
   /*
   Responsibilities:
     1. Direct access to localStorage
@@ -32,5 +32,3 @@ class StorageService {
     return this.#storage.length;
   }
 }
-
-export default StorageService;
