@@ -38,7 +38,7 @@ export default class TaskListView {
     return menuElem;
   }
 
-  #createTaskListElement(task: TaskItem): Node {
+  #createTaskListElement(task: TaskItem): HTMLLIElement {
     const { id, description, creationDate } = task;
     const taskElem: HTMLLIElement = document.createElement('li');
     taskElem.classList.add('task');
@@ -83,7 +83,7 @@ export default class TaskListView {
     this.#updateTaskList();
   }
 
-  #createNewTaskForm(): Node {
+  #createNewTaskForm(): HTMLFormElement {
     const taskForm: HTMLFormElement = document.createElement('form');
     taskForm.action = '';
     taskForm.classList.add('new-task-form');
@@ -108,7 +108,7 @@ export default class TaskListView {
     this.#updateTaskList();
   }
 
-  #createDeleteAllTasksBtn(): Node {
+  #createDeleteAllTasksBtn(): HTMLButtonElement {
     const btnElem: HTMLButtonElement = document.createElement('button');
     btnElem.id = 'delete-all-tasks';
     btnElem.textContent = 'Delete all tasks';
@@ -122,8 +122,9 @@ export default class TaskListView {
 
   #showTaskListControls(): void {
     const controls: HTMLDivElement = document.createElement('div');
-    const addNewTaskForm: Node = this.#createNewTaskForm();
-    const deleteAllTasksBtn: Node = this.#createDeleteAllTasksBtn();
+    const addNewTaskForm: HTMLFormElement = this.#createNewTaskForm();
+    const deleteAllTasksBtn: HTMLButtonElement =
+      this.#createDeleteAllTasksBtn();
 
     controls.append(addNewTaskForm, deleteAllTasksBtn);
     document.body.append(controls);
@@ -134,7 +135,7 @@ export default class TaskListView {
       (task: TaskItem): boolean => !this.#displayedTaskIDs.includes(task.id)
     );
 
-    const newTaskItemElems: Node[] = newTasksToDisplay.map(
+    const newTaskItemElems: HTMLLIElement[] = newTasksToDisplay.map(
       this.#createTaskListElement
     );
 
