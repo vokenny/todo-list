@@ -6,11 +6,8 @@ export default class TodoListViewModel {
   Performs CRUD operations on the TodoItems via StorageService.
   */
 
-  #storage: StorageService;
-
-  constructor() {
-    this.#storage = new StorageService(localStorage);
-  }
+  #storage: StorageService = new StorageService(localStorage);
+  #TODO_LIST_KEY: string = 'todoItemList';
 
   getTodoItems(): TodoItem[] {
     const todoItemListData: string =
@@ -23,6 +20,10 @@ export default class TodoListViewModel {
   addTodoItem(task: string): void {
     const newTodo: TodoItem = new TodoItem(task);
     const newTodoItemList: TodoItem[] = [...this.getTodoItems(), newTodo];
-    this.#storage.setItem('todoItemList', JSON.stringify(newTodoItemList));
+    this.#storage.setItem(this.#TODO_LIST_KEY, JSON.stringify(newTodoItemList));
+  }
+
+  deleteAllTodoItems(): void {
+    this.#storage.removeItem(this.#TODO_LIST_KEY);
   }
 }
