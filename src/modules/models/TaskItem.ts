@@ -1,23 +1,23 @@
-import Todo from '../interfaces/Todo';
+import Task from '../interfaces/Task';
 import uuidv4 from '../services/UUIDService';
 
-export default class TodoItem implements Todo {
+export default class TaskItem implements Task {
   /*
-  This class is used for creating new TodoItems.
-  It implements the Todo interface, so:
+  This class is used for creating new TaskItems.
+  It implements the Task interface, so:
     1. it highlights type-safety to check we have all the required properties
-    2. we have intellisense support for doing read/update operations on the TodoItems
+    2. we have intellisense support for doing read/update operations on the TaskItems
   */
 
   id: string;
-  task: string;
+  description: string;
   isDone: boolean;
   creationDate: string;
   completedDate?: string | undefined;
 
   constructor(task: string) {
     this.id = uuidv4();
-    this.task = task;
+    this.description = task;
     this.isDone = false;
     this.creationDate = new Date().toDateString();
   }

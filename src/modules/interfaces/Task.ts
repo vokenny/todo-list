@@ -1,6 +1,6 @@
-export default interface Todo {
+export default interface Task {
   id: string;
-  task: string;
+  description: string;
   isDone: boolean;
   creationDate: string;
   completedDate?: string | undefined;

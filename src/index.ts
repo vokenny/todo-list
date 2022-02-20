@@ -1,5 +1,5 @@
-import TodoListView from './modules/views/TodoListView';
+import TaskListView from './modules/views/TaskListView';
 
-const todoListView = new TodoListView();
+const taskListView = new TaskListView();
 
-todoListView.display();
+taskListView.display();
