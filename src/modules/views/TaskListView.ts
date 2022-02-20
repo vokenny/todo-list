@@ -39,7 +39,7 @@ export default class TaskListView {
     document.body.append(controls);
   }
 
-  #showTaslList(): void {
+  #showTaskList(): void {
     const taskItemList: TaskItem[] = this.#taskItemList.getTaskItems();
     const menuElem: HTMLMenuElement = document.createElement('menu');
     const taskItems: Node[] = taskItemList.map(this.#createTaskListElement);
@@ -50,6 +50,6 @@ export default class TaskListView {
 
   display(): void {
     this.#showTaskListControls();
-    this.#showTaslList();
+    this.#showTaskList();
   }
 }
