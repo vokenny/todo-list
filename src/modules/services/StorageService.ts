@@ -23,12 +23,4 @@ export default class StorageService {
   removeItem(key: string): void {
     this.#storage.removeItem(key);
   }
-
-  clear(): void {
-    this.#storage.clear();
-  }
-
-  getLength(): number {
-    return this.#storage.length;
-  }
 }
