@@ -6,8 +6,6 @@ export default class TaskListView {
   Used for taking the data returned from TaskListViewModel, and representing it on the browser.
   */
 
-  // TODO: Refactor these out to their own components!
-
   #taskListVM: TaskListVM = new TaskListVM();
 
   #NEW_TASK_INPUT_ID: string = 'new-task-input';
@@ -43,8 +41,16 @@ export default class TaskListView {
     const taskElem: HTMLLIElement = document.createElement('li');
     taskElem.classList.add('task');
     taskElem.dataset.id = id;
-    taskElem.textContent = `${creationDate}\t${description}`;
 
+    const checkbox: HTMLInputElement = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = id;
+
+    const label: HTMLLabelElement = document.createElement('label');
+    label.textContent = `${creationDate}\t${description}`;
+    label.setAttribute('for', id);
+
+    taskElem.append(checkbox, label);
     return taskElem;
   }
 
