@@ -19,7 +19,7 @@ export default class TaskListViewModel {
 
   addTaskItem(task: string): void {
     const newTask: TaskItem = new TaskItem(task);
-    const newTaskItemList: TaskItem[] = [...this.getTaskItems(), newTask];
+    const newTaskItemList: TaskItem[] = [newTask, ...this.getTaskItems()];
     this.#storage.setItem(this.#TASK_LIST_KEY, JSON.stringify(newTaskItemList));
   }
 

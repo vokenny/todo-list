@@ -1,5 +1,5 @@
-import TaskItem from '../models/TaskItem';
-import TaskListVM from '../view-models/TaskListViewModel';
+import TaskItem from '../../models/TaskItem';
+import TaskListVM from '../../view-models/TaskListViewModel';
 
 export default class TaskListView {
   /*
@@ -36,6 +36,10 @@ export default class TaskListView {
     return menuElem;
   }
 
+  #toggleTaskCompleted(evt: any): void {
+    console.log(evt.target);
+  }
+
   #createTaskListElement(task: TaskItem): HTMLLIElement {
     const { id, description, creationDate } = task;
     const taskElem: HTMLLIElement = document.createElement('li');
@@ -50,6 +54,9 @@ export default class TaskListView {
     label.textContent = `${creationDate}\t${description}`;
     label.setAttribute('for', id);
 
+    taskElem.addEventListener('click', (evt: MouseEvent): void =>
+      this.#toggleTaskCompleted(evt)
+    );
     taskElem.append(checkbox, label);
     return taskElem;
   }
@@ -145,7 +152,7 @@ export default class TaskListView {
       this.#createTaskListElement
     );
 
-    this.#taskList.append(...newTaskItemElems);
+    this.#taskList.prepend(...newTaskItemElems);
   }
 
   #removeDisplayedTasks(taskItemList: TaskItem[]): void {
