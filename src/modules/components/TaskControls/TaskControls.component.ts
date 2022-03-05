@@ -11,7 +11,6 @@ export default function TaskControls(): Node {
 
   deleteAllTasksBtn.addEventListener('click', (): void => {
     taskListVM.deleteAllTaskItems();
-    taskListVM.updateTaskList();
   });
 
   controls.append(newTaskForm, deleteAllTasksBtn);

@@ -1,7 +1,14 @@
 import './style.css';
-import TaskListView from './modules/views/TaskListView/TaskListView';
-import { taskListVM } from './modules/view-models/TaskListViewModel';
+import TaskControls from './modules/components/TaskControls/TaskControls.component';
+import TaskList from './modules/components/TaskList/TaskList.component';
+import { taskListView } from './modules/views/TaskListView/TaskListView';
 
-const taskListView: Node = TaskListView();
-document.body.append(taskListView);
-taskListVM.updateTaskList();
+/* === Initial view === */
+
+const main: HTMLElement = document.createElement('main');
+const taskControls: Node = TaskControls();
+const taskList: HTMLMenuElement = TaskList();
+
+main.append(taskControls, taskList);
+document.body.append(main);
+taskListView.updateTaskList();

@@ -1,4 +1,5 @@
 import { taskListVM } from '../../view-models/TaskListViewModel';
+import { taskListView } from '../../views/TaskListView/TaskListView';
 
 export default function NewTaskForm(): Node {
   const NEW_TASK_INPUT_ID: string = 'new-task-input';
@@ -26,7 +27,6 @@ export default function NewTaskForm(): Node {
     ) as HTMLInputElement;
 
     taskListVM.addTaskItem(newTaskInput.value);
-    taskListVM.updateTaskList();
     newTaskInput.value = '';
   }
 
