@@ -10,7 +10,7 @@ export default class TaskListView {
 
   #taskListVM: TaskListVM = new TaskListVM();
 
-  #NEW_TASK_INPUT_ID = 'new-task-input';
+  #NEW_TASK_INPUT_ID: string = 'new-task-input';
 
   get #displayedTaskElems(): HTMLElement[] {
     return Array.from(document.querySelectorAll('.task')) as HTMLElement[];
@@ -18,7 +18,7 @@ export default class TaskListView {
 
   get #displayedTaskIDs(): string[] {
     return this.#displayedTaskElems.map(
-      (task: HTMLElement) => task.dataset.id ?? ''
+      (task: HTMLElement): string => task.dataset.id ?? ''
     );
   }
 
