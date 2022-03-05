@@ -1,7 +1,5 @@
 import StorageService from '../services/StorageService';
 import TaskItem from '../models/TaskItem';
-import TaskList from '../components/TaskList/TaskList.component';
-import Task from '../components/TaskItem/Task.component';
 import { taskListView } from '../views/TaskListView/TaskListView';
 
 class TaskListViewModel {

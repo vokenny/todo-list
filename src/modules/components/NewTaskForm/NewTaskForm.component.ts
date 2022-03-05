@@ -1,5 +1,4 @@
 import { taskListVM } from '../../view-models/TaskListViewModel';
-import { taskListView } from '../../views/TaskListView/TaskListView';
 
 export default function NewTaskForm(): Node {
   const NEW_TASK_INPUT_ID: string = 'new-task-input';
