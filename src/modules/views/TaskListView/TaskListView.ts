@@ -1,10 +1,11 @@
 import Task from '../../components/TaskItem/Task.component';
+import { TaskList } from '../../components/TaskList/TaskList.component';
 import TaskItem from '../../models/TaskItem';
 import { taskListVM } from '../../view-models/TaskListViewModel';
 
 export default class TaskListView {
   /*
-  Used for taking the data returned from TaskListViewModel, and representing it on the browser.
+  Bringing the components together, and representing it on the browser.
   */
 
   #NEW_TASK_INPUT_ID: string = 'new-task-input';
@@ -23,14 +24,7 @@ export default class TaskListView {
     const maybeMenuElem: Element | null = document.querySelector('.task-list');
     const menuElem: HTMLMenuElement = maybeMenuElem
       ? (maybeMenuElem as HTMLMenuElement)
-      : this.#createTaskList();
-
-    return menuElem;
-  }
-
-  #createTaskList(): HTMLMenuElement {
-    const menuElem: HTMLMenuElement = document.createElement('menu');
-    menuElem.classList.add('task-list');
+      : TaskList();
 
     return menuElem;
   }
