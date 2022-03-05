@@ -1,12 +1,11 @@
+import Task from '../../components/TaskItem/Task.component';
 import TaskItem from '../../models/TaskItem';
-import TaskListVM from '../../view-models/TaskListViewModel';
+import { taskListVM } from '../../view-models/TaskListViewModel';
 
 export default class TaskListView {
   /*
   Used for taking the data returned from TaskListViewModel, and representing it on the browser.
   */
-
-  #taskListVM: TaskListVM = new TaskListVM();
 
   #NEW_TASK_INPUT_ID: string = 'new-task-input';
 
@@ -36,31 +35,6 @@ export default class TaskListView {
     return menuElem;
   }
 
-  #toggleTaskCompleted(evt: any): void {
-    console.log(evt.target);
-  }
-
-  #createTaskListElement(task: TaskItem): HTMLLIElement {
-    const { id, description, creationDate } = task;
-    const taskElem: HTMLLIElement = document.createElement('li');
-    taskElem.classList.add('task');
-    taskElem.dataset.id = id;
-
-    const checkbox: HTMLInputElement = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.id = id;
-
-    const label: HTMLLabelElement = document.createElement('label');
-    label.textContent = `${creationDate}\t${description}`;
-    label.setAttribute('for', id);
-
-    taskElem.addEventListener('click', (evt: MouseEvent): void =>
-      this.#toggleTaskCompleted(evt)
-    );
-    taskElem.append(checkbox, label);
-    return taskElem;
-  }
-
   #addNewTask(evt: any): void {
     evt.preventDefault();
 
@@ -69,7 +43,7 @@ export default class TaskListView {
       `#${this.#NEW_TASK_INPUT_ID}`
     ) as HTMLInputElement;
 
-    this.#taskListVM.addTaskItem(newTaskInput.value);
+    taskListVM.addTaskItem(newTaskInput.value);
     newTaskInput.value = '';
   }
 
@@ -113,7 +87,7 @@ export default class TaskListView {
   }
 
   #deleteAllTasks(): void {
-    this.#taskListVM.deleteAllTaskItems();
+    taskListVM.deleteAllTaskItems();
   }
 
   #deleteAllTasksEventHandlers(): void {
@@ -148,9 +122,7 @@ export default class TaskListView {
       (task: TaskItem): boolean => !this.#displayedTaskIDs.includes(task.id)
     );
 
-    const newTaskItemElems: HTMLLIElement[] = newTasksToDisplay.map(
-      this.#createTaskListElement
-    );
+    const newTaskItemElems: Node[] = newTasksToDisplay.map(Task);
 
     this.#taskList.prepend(...newTaskItemElems);
   }
@@ -174,7 +146,7 @@ export default class TaskListView {
   #updateTaskList(): void {
     document.body.append(this.#taskList);
 
-    const taskItemList: TaskItem[] = this.#taskListVM.getTaskItems();
+    const taskItemList: TaskItem[] = taskListVM.getTaskItems();
     const taskItemListLen: number = taskItemList.length;
     const displayedTaskListLen: number = this.#displayedTaskElems.length;
 
