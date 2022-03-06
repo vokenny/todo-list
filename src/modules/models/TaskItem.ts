@@ -10,14 +10,14 @@ export default class TaskItem implements Task {
   */
 
   id: string;
-  description: string;
+  title: string;
   isDone: boolean;
   creationDate: string;
   completedDate?: string | undefined;
 
   constructor(task: string) {
     this.id = uuidv4();
-    this.description = task;
+    this.title = task;
     this.isDone = false;
     this.creationDate = new Date().toDateString();
   }

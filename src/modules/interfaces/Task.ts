@@ -1,6 +1,6 @@
 export default interface Task {
   id: string;
-  description: string;
+  title: string;
   isDone: boolean;
   creationDate: string;
   completedDate?: string | undefined;

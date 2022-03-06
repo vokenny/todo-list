@@ -1,4 +1,5 @@
-import Task from '../../components/TaskItem/Task.component';
+import './task-list-view-style.css';
+import { TaskCard } from '../../components/TaskCard/TaskCard.component';
 import TaskList from '../../components/TaskList/TaskList.component';
 import TaskItem from '../../models/TaskItem';
 import { taskListVM } from '../../view-models/TaskListViewModel';
@@ -32,7 +33,7 @@ class TaskListView {
       (task: TaskItem): boolean => !this.#displayedTaskIDs.includes(task.id)
     );
 
-    const newTaskItemElems: Node[] = newTasksToDisplay.map(Task);
+    const newTaskItemElems: Node[] = newTasksToDisplay.map(TaskCard);
 
     this.#getTaskList().prepend(...newTaskItemElems);
   }
@@ -50,8 +51,6 @@ class TaskListView {
   }
 
   updateTaskList(): void {
-    document.body.append(this.#getTaskList());
-
     const taskItemList: TaskItem[] = taskListVM.getTaskItems();
     const taskItemListLen: number = taskItemList.length;
     const displayedTaskListLen: number = this.#displayedTaskElems.length;
@@ -66,4 +65,4 @@ class TaskListView {
   }
 }
 
-export const taskListView = new TaskListView();
+export const taskListView: TaskListView = new TaskListView();

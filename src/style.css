@@ -4,18 +4,25 @@
 
 html,
 body {
+  margin: 0;
+  padding: 0;
   height: 100%;
   width: 100%;
 }
 
 body {
+  background-image: linear-gradient(120deg, #a1ffc4b6 0%, #8cd9ffb2 100%);
+}
+
+main {
+  height: 100%;
+  width: 100%;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(120deg, #a1ffc4b6 0%, #8cd9ffb2 100%);
 }
 
 menu {
