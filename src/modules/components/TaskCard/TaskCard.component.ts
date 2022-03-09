@@ -9,10 +9,10 @@ export function TaskCard({
   creationDate,
   completedDate,
 }: Task): Node {
-  const taskCardElem: HTMLDivElement = document.createElement('div');
-  taskCardElem.classList.add('task-card', 'glass');
-  taskCardElem.dataset.id = id;
-  if (isDone) taskCardElem.classList.add('completed');
+  const taskCard: HTMLDivElement = document.createElement('div');
+  taskCard.classList.add('task-card', 'glass');
+  taskCard.dataset.id = id;
+  if (isDone) taskCard.classList.add('completed');
 
   const checkbox: HTMLInputElement = document.createElement('input');
   checkbox.type = 'checkbox';
@@ -32,6 +32,8 @@ export function TaskCard({
   taskHeading.classList.add('task-title');
   taskHeading.append(label);
 
-  taskCardElem.append(checkbox, taskHeading);
-  return taskCardElem;
+  const rule: HTMLHRElement = document.createElement('hr');
+
+  taskCard.append(checkbox, taskHeading, rule);
+  return taskCard;
 }
