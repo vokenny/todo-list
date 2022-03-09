@@ -10,10 +10,10 @@ export default function NewTaskForm(): Node {
   newTaskForm.action = '';
   newTaskForm.classList.add('new-task-form');
 
-  const newTaskInput: HTMLInputElement = document.createElement('input');
-  newTaskInput.id = NEW_TASK_INPUT_ID;
-  newTaskInput.type = 'text';
-  newTaskInput.placeholder = 'Add new todo';
+  const newTaskTitleInput: HTMLInputElement = document.createElement('input');
+  newTaskTitleInput.id = NEW_TASK_INPUT_ID;
+  newTaskTitleInput.type = 'text';
+  newTaskTitleInput.placeholder = 'Add new task...';
 
   const formSubmit: HTMLInputElement = document.createElement('input');
   formSubmit.classList.add('new-task-form');
@@ -32,7 +32,7 @@ export default function NewTaskForm(): Node {
     newTaskInput.value = '';
   }
 
-  newTaskForm.append(title, newTaskInput, formSubmit);
+  newTaskForm.append(title, newTaskTitleInput, formSubmit);
   newTaskForm.addEventListener('submit', (evt: any): void => addNewTask(evt));
 
   return newTaskForm;

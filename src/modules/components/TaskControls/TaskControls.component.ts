@@ -1,8 +1,11 @@
+import './task-controls-style.css';
 import { taskListVM } from '../../view-models/TaskListViewModel';
 import NewTaskForm from '../NewTaskForm/NewTaskForm.component';
 
 export default function TaskControls(): Node {
   const controls: HTMLDivElement = document.createElement('div');
+  controls.classList.add('task-controls', 'glass');
+
   const newTaskForm: Node = NewTaskForm();
 
   const deleteAllTasksBtn: HTMLButtonElement = document.createElement('button');
