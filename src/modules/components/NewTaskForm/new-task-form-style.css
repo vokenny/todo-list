@@ -1,0 +1,18 @@
+.new-task-form {
+  padding-bottom: 1em;
+}
+
+.new-task-form > * {
+  display: block;
+}
+
+.new-task-form input,
+.new-task-form textarea {
+  margin: 1em 0;
+  padding: 0.5em;
+  width: 100%;
+}
+
+#new-task-notes {
+  resize: vertical;
+}

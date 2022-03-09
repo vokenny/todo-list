@@ -1,3 +1,4 @@
+import NewTask from '../interfaces/NewTask';
 import Task from '../interfaces/Task';
 import uuidv4 from '../services/UUIDService';
 
@@ -11,13 +12,15 @@ export default class TaskItem implements Task {
 
   id: string;
   title: string;
+  notes: string;
   isDone: boolean;
   creationDate: string;
   completedDate?: string | undefined;
 
-  constructor(task: string) {
+  constructor(newTask: NewTask) {
     this.id = uuidv4();
-    this.title = task;
+    this.title = newTask.title;
+    this.notes = newTask.notes;
     this.isDone = false;
     this.creationDate = new Date().toDateString();
   }

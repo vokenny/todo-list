@@ -1,7 +1,10 @@
+import './new-task-form-style.css';
+import NewTask from '../../interfaces/NewTask';
 import { taskListVM } from '../../view-models/TaskListViewModel';
 
 export default function NewTaskForm(): Node {
-  const NEW_TASK_INPUT_ID: string = 'new-task-input';
+  const NEW_TASK_TITLE_ID: string = 'new-task-title';
+  const NEW_TASK_NOTES_ID: string = 'new-task-notes';
 
   const title: HTMLHeadingElement = document.createElement('h1');
   title.textContent = 'Tasks';
@@ -10,29 +13,46 @@ export default function NewTaskForm(): Node {
   newTaskForm.action = '';
   newTaskForm.classList.add('new-task-form');
 
-  const newTaskTitleInput: HTMLInputElement = document.createElement('input');
-  newTaskTitleInput.id = NEW_TASK_INPUT_ID;
-  newTaskTitleInput.type = 'text';
-  newTaskTitleInput.placeholder = 'Add new task...';
+  const titleInput: HTMLInputElement = document.createElement('input');
+  titleInput.id = NEW_TASK_TITLE_ID;
+  titleInput.type = 'text';
+  titleInput.placeholder = 'Add new task...';
 
-  const formSubmit: HTMLInputElement = document.createElement('input');
-  formSubmit.classList.add('new-task-form');
+  const rule: HTMLHRElement = document.createElement('hr');
+
+  const notesInput: HTMLTextAreaElement = document.createElement('textarea');
+  notesInput.id = NEW_TASK_NOTES_ID;
+  notesInput.rows = 8;
+  notesInput.maxLength = 250;
+  notesInput.placeholder = '(Optional) Add any notes to your task';
+
+  const formSubmit: HTMLButtonElement = document.createElement('button');
+  formSubmit.id = 'new-task-form-submit';
   formSubmit.type = 'submit';
-  formSubmit.value = 'Add new todo';
+  formSubmit.textContent = 'Add new todo';
 
   function addNewTask(evt: any): void {
     evt.preventDefault();
 
     const newTaskForm: HTMLFormElement = evt.target as HTMLFormElement;
-    const newTaskInput: HTMLInputElement = newTaskForm.querySelector(
-      `#${NEW_TASK_INPUT_ID}`
+    const titleInput: HTMLInputElement = newTaskForm.querySelector(
+      `#${NEW_TASK_TITLE_ID}`
     ) as HTMLInputElement;
 
-    taskListVM.addTaskItem(newTaskInput.value);
-    newTaskInput.value = '';
+    const notesInput: HTMLInputElement = newTaskForm.querySelector(
+      `#${NEW_TASK_NOTES_ID}`
+    ) as HTMLInputElement;
+
+    const newTask: NewTask = {
+      title: titleInput.value,
+      notes: notesInput.value,
+    };
+
+    taskListVM.addTaskItem(newTask);
+    titleInput.value = '';
   }
 
-  newTaskForm.append(title, newTaskTitleInput, formSubmit);
+  newTaskForm.append(title, titleInput, rule, notesInput, formSubmit);
   newTaskForm.addEventListener('submit', (evt: any): void => addNewTask(evt));
 
   return newTaskForm;

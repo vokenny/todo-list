@@ -1,6 +1,7 @@
 import StorageService from '../services/StorageService';
 import TaskItem from '../models/TaskItem';
 import { taskListView } from '../views/TaskListView/TaskListView';
+import NewTask from '../interfaces/NewTask';
 
 class TaskListViewModel {
   /*
@@ -19,9 +20,9 @@ class TaskListViewModel {
     return taskItemList;
   }
 
-  addTaskItem(task: string): void {
-    const newTask: TaskItem = new TaskItem(task);
-    const newTaskItemList: TaskItem[] = [newTask, ...this.getTaskItems()];
+  addTaskItem(newTask: NewTask): void {
+    const newTaskItem: TaskItem = new TaskItem(newTask);
+    const newTaskItemList: TaskItem[] = [newTaskItem, ...this.getTaskItems()];
     this.#storage.setItem(this.#TASK_LIST_KEY, JSON.stringify(newTaskItemList));
     taskListView.updateTaskList();
   }

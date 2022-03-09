@@ -1,6 +1,14 @@
 .task-controls {
   margin: 1em 0;
+  padding: 1em;
   min-height: 80px;
   width: 80vw;
   max-width: 600px;
+}
+
+button {
+  border-radius: 8px;
+  padding-left: 1em;
+  padding-right: 1em;
+  height: 40px;
 }

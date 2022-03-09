@@ -5,6 +5,7 @@ import { taskListVM } from '../../view-models/TaskListViewModel';
 export function TaskCard({
   id,
   title,
+  notes,
   isDone,
   creationDate,
   completedDate,
@@ -34,6 +35,10 @@ export function TaskCard({
 
   const rule: HTMLHRElement = document.createElement('hr');
 
-  taskCard.append(checkbox, taskHeading, rule);
+  const taskNotes: HTMLParagraphElement = document.createElement('p');
+  taskNotes.classList.add('task-notes');
+  taskNotes.textContent = notes;
+
+  taskCard.append(checkbox, taskHeading, rule, taskNotes);
   return taskCard;
 }
