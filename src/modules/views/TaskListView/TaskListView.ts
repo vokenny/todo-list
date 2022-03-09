@@ -10,7 +10,7 @@ class TaskListView {
   */
 
   get #displayedTaskElems(): HTMLElement[] {
-    return Array.from(document.querySelectorAll('.task')) as HTMLElement[];
+    return Array.from(document.querySelectorAll('.task-card')) as HTMLElement[];
   }
 
   get #displayedTaskIDs(): string[] {
