@@ -4,6 +4,15 @@
   border: 1px solid black;
 }
 
+.task-title {
+  display: inline-block;
+}
+
+.checkbox {
+  width: 1.5em;
+  height: 1.5em;
+}
+
 .glass {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;

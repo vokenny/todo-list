@@ -3,6 +3,9 @@ import { taskListVM } from '../../view-models/TaskListViewModel';
 export default function NewTaskForm(): Node {
   const NEW_TASK_INPUT_ID: string = 'new-task-input';
 
+  const title: HTMLHeadingElement = document.createElement('h1');
+  title.textContent = 'Tasks';
+
   const newTaskForm: HTMLFormElement = document.createElement('form');
   newTaskForm.action = '';
   newTaskForm.classList.add('new-task-form');
@@ -29,7 +32,7 @@ export default function NewTaskForm(): Node {
     newTaskInput.value = '';
   }
 
-  newTaskForm.append(newTaskInput, formSubmit);
+  newTaskForm.append(title, newTaskInput, formSubmit);
   newTaskForm.addEventListener('submit', (evt: any): void => addNewTask(evt));
 
   return newTaskForm;

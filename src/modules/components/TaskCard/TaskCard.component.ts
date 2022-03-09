@@ -16,6 +16,7 @@ export function TaskCard({
 
   const checkbox: HTMLInputElement = document.createElement('input');
   checkbox.type = 'checkbox';
+  checkbox.classList.add('checkbox');
   checkbox.id = id;
 
   checkbox.addEventListener('change', (evt: Event): void => {
@@ -27,6 +28,10 @@ export function TaskCard({
   label.textContent = title;
   label.setAttribute('for', id);
 
-  taskCardElem.append(checkbox, label);
+  const taskHeading: HTMLHeadingElement = document.createElement('h2');
+  taskHeading.classList.add('task-title');
+  taskHeading.append(label);
+
+  taskCardElem.append(checkbox, taskHeading);
   return taskCardElem;
 }
