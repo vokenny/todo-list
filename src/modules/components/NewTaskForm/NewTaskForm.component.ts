@@ -22,8 +22,8 @@ export default function NewTaskForm(): Node {
 
   const notesInput: HTMLTextAreaElement = document.createElement('textarea');
   notesInput.id = NEW_TASK_NOTES_ID;
-  notesInput.rows = 8;
-  notesInput.maxLength = 250;
+  notesInput.rows = 4;
+  notesInput.maxLength = 1000;
   notesInput.placeholder = '(Optional) Add any notes to your task';
 
   const formSubmit: HTMLButtonElement = document.createElement('button');

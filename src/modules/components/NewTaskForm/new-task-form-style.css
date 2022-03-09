@@ -16,4 +16,5 @@
 
 #new-task-notes {
   resize: vertical;
+  max-height: 300px;
 }
