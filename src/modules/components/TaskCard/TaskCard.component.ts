@@ -39,6 +39,8 @@ export function TaskCard({
   taskNotes.classList.add('task-notes');
   taskNotes.textContent = notes;
 
-  taskCard.append(checkbox, taskHeading, rule, taskNotes);
+  notes
+    ? taskCard.append(checkbox, taskHeading, rule, taskNotes)
+    : taskCard.append(checkbox, taskHeading);
   return taskCard;
 }

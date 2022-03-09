@@ -2,6 +2,10 @@
   padding-bottom: 1em;
 }
 
+.new-task-form > h1 {
+  margin-top: 0;
+}
+
 .new-task-form > * {
   display: block;
 }
