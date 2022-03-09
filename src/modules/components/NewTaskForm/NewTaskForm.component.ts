@@ -50,6 +50,7 @@ export default function NewTaskForm(): Node {
 
     taskListVM.addTaskItem(newTask);
     titleInput.value = '';
+    notesInput.value = '';
   }
 
   newTaskForm.append(title, titleInput, rule, notesInput, formSubmit);
