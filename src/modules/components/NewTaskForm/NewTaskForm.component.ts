@@ -32,6 +32,35 @@ export default function NewTaskForm(): Node {
   formSubmit.type = 'submit';
   formSubmit.textContent = 'Add new todo';
 
+  function sanitiseForm(
+    titleInput: HTMLInputElement,
+    notesInput: HTMLInputElement
+  ): NewTask {
+    const title: string = titleInput.value;
+    const notes: string = notesInput.value;
+    const sanitisedTitle: string = title.trim();
+    const sanitisedNotes: string = notes.trim();
+
+    return {
+      title: sanitisedTitle,
+      notes: sanitisedNotes,
+    };
+  }
+
+  function validateForm({ title }: NewTask): boolean {
+    return !!title;
+  }
+
+  function handleFormErrors(titleInput: HTMLInputElement) {
+    titleInput.classList.add('error');
+  }
+
+  function resetForm({ titleInput, notesInput }: any) {
+    titleInput.value = '';
+    notesInput.value = '';
+    titleInput.classList.remove('error');
+  }
+
   function addNewTask(evt: any): void {
     evt.preventDefault();
 
@@ -44,14 +73,15 @@ export default function NewTaskForm(): Node {
       `#${NEW_TASK_NOTES_ID}`
     ) as HTMLInputElement;
 
-    const newTask: NewTask = {
-      title: titleInput.value,
-      notes: notesInput.value,
-    };
+    const sanitisedForm: NewTask = sanitiseForm(titleInput, notesInput);
+    const isValid: boolean = validateForm(sanitisedForm);
 
-    taskListVM.addTaskItem(newTask);
-    titleInput.value = '';
-    notesInput.value = '';
+    if (isValid) {
+      taskListVM.addTaskItem(sanitisedForm);
+      resetForm({ titleInput, notesInput });
+    }
+
+    if (!isValid) handleFormErrors(titleInput);
   }
 
   newTaskForm.append(title, titleInput, rule, notesInput, formSubmit);

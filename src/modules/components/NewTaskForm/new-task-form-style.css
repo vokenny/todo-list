@@ -22,3 +22,7 @@
   resize: vertical;
   max-height: 300px;
 }
+
+.error {
+  border: 2px solid red;
+}
