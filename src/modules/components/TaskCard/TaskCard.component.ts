@@ -21,7 +21,6 @@ export function TaskCard({
   checkbox.id = id;
   checkbox.checked = !!completedDate;
 
-  // TODO: add taskListVM method to update single task upon checkbox state change
   checkbox.addEventListener('change', (evt: Event): void => {
     const check: HTMLElement = evt.target as HTMLElement;
     taskListVM.toggleCompletedOnTask(check.id);
@@ -34,6 +33,8 @@ export function TaskCard({
   const taskHeading: HTMLHeadingElement = document.createElement('h2');
   taskHeading.classList.add('task-title');
   taskHeading.append(label);
+
+  // TODO: Add a due date, and remove creation date
 
   const rule: HTMLHRElement = document.createElement('hr');
 

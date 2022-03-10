@@ -16,6 +16,11 @@
   height: 1.5em;
 }
 
+.task-title > label:hover,
+.checkbox:hover {
+  cursor: pointer;
+}
+
 .task-notes {
   word-wrap: break-word;
 }

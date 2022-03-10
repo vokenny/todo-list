@@ -13,6 +13,10 @@ button {
   height: 40px;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 #delete-all-tasks {
   color: white;
   background-color: #850000;
