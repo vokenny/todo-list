@@ -19,7 +19,9 @@ export function TaskCard({
   checkbox.type = 'checkbox';
   checkbox.classList.add('checkbox');
   checkbox.id = id;
+  checkbox.checked = !!completedDate;
 
+  // TODO: add taskListVM method to update single task upon checkbox state change
   checkbox.addEventListener('change', (evt: Event): void => {
     const check: HTMLElement = evt.target as HTMLElement;
     taskListVM.toggleCompletedOnTask(check.id);
@@ -39,8 +41,17 @@ export function TaskCard({
   taskNotes.classList.add('task-notes');
   taskNotes.textContent = notes;
 
-  notes
-    ? taskCard.append(checkbox, taskHeading, rule, taskNotes)
-    : taskCard.append(checkbox, taskHeading);
+  const completionDate: HTMLParagraphElement = document.createElement('p');
+  if (completedDate) completionDate.textContent = `Completed: ${completedDate}`;
+
+  const taskCardElems: HTMLSpanElement[] = [
+    checkbox,
+    taskHeading,
+    notes ? rule : null,
+    notes ? taskNotes : null,
+    completedDate ? completionDate : null,
+  ].filter((t) => t !== null) as HTMLSpanElement[];
+
+  taskCard.append(...taskCardElems);
   return taskCard;
 }

@@ -6,7 +6,7 @@ export default function NewTaskForm(): Node {
   const NEW_TASK_TITLE_ID: string = 'new-task-title';
   const NEW_TASK_NOTES_ID: string = 'new-task-notes';
 
-  const title: HTMLHeadingElement = document.createElement('h2');
+  const title: HTMLHeadingElement = document.createElement('h1');
   title.textContent = 'Tasks';
 
   const newTaskForm: HTMLFormElement = document.createElement('form');
