@@ -10,6 +10,7 @@ body {
 }
 
 body {
+  font-family: 'Overpass Mono', monospace;
   padding: 1em;
   background-image: linear-gradient(120deg, #a1ffc4b6 0%, #8cd9ffb2 100%);
 }
