@@ -13,7 +13,7 @@ export function TaskCard({
   const taskCard: HTMLDivElement = document.createElement('div');
   taskCard.classList.add('task-card', 'glass');
   taskCard.dataset.id = id;
-  if (isDone) taskCard.classList.add('completed');
+  if (isDone) taskCard.classList.add('done');
 
   const checkbox: HTMLInputElement = document.createElement('input');
   checkbox.type = 'checkbox';
@@ -42,6 +42,7 @@ export function TaskCard({
   taskNotes.textContent = notes;
 
   const completionDate: HTMLParagraphElement = document.createElement('p');
+  completionDate.classList.add('completed-date');
   if (completedDate) completionDate.textContent = `Completed: ${completedDate}`;
 
   const taskCardElems: HTMLSpanElement[] = [
@@ -50,7 +51,7 @@ export function TaskCard({
     notes ? rule : null,
     notes ? taskNotes : null,
     completedDate ? completionDate : null,
-  ].filter((t) => t !== null) as HTMLSpanElement[];
+  ].filter((elem) => elem !== null) as HTMLSpanElement[];
 
   taskCard.append(...taskCardElems);
   return taskCard;

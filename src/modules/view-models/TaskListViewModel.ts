@@ -28,20 +28,26 @@ class TaskListViewModel {
   }
 
   toggleCompletedOnTask(id: string): void {
-    const updatedTaskItemList: TaskItem[] = this.getTaskItems().map(
-      (task: TaskItem): TaskItem =>
-        task.id === id
-          ? {
-              ...task,
-              isDone: !task.isDone,
-              completedDate: !task.isDone ? new Date().toDateString() : '', // Unintuitive, but it needs to be negated like isDone above it
-            }
-          : task
+    const updatedTaskItemList: TaskItem[] = this.getTaskItems().map((task) =>
+      task.id === id
+        ? {
+            ...task,
+            isDone: !task.isDone,
+            completedDate: !task.isDone ? new Date().toDateString() : '', // Unintuitive, but it needs to be negated like isDone above it
+          }
+        : task
     );
+
+    const updatedTask: TaskItem | undefined = updatedTaskItemList.find(
+      (task: TaskItem): boolean => task.id === id
+    );
+
     this.#storage.setItem(
       this.#TASK_LIST_KEY,
       JSON.stringify(updatedTaskItemList)
     );
+
+    if (updatedTask) taskListView.updateSingleTask(updatedTask);
   }
 
   deleteAllTaskItems(): void {
