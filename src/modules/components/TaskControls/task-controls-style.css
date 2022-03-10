@@ -12,3 +12,8 @@ button {
   padding-right: 1em;
   height: 40px;
 }
+
+#delete-all-tasks {
+  color: white;
+  background-color: #850000;
+}
