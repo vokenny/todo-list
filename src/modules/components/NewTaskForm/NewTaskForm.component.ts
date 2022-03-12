@@ -16,7 +16,7 @@ export default function NewTaskForm(): Node {
   const titleInput: HTMLInputElement = document.createElement('input');
   titleInput.id = NEW_TASK_TITLE_ID;
   titleInput.type = 'text';
-  titleInput.maxLength = 20;
+  titleInput.maxLength = 40;
   titleInput.placeholder = 'Add new task...';
 
   const rule: HTMLHRElement = document.createElement('hr');
@@ -36,10 +36,8 @@ export default function NewTaskForm(): Node {
     titleInput: HTMLInputElement,
     notesInput: HTMLInputElement
   ): NewTask {
-    const title: string = titleInput.value;
-    const notes: string = notesInput.value;
-    const sanitisedTitle: string = title.trim();
-    const sanitisedNotes: string = notes.trim();
+    const sanitisedTitle: string = titleInput.value.trim();
+    const sanitisedNotes: string = notesInput.value.trim();
 
     return {
       title: sanitisedTitle,

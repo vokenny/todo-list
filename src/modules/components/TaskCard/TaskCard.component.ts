@@ -34,7 +34,7 @@ export function TaskCard({
   taskHeading.classList.add('task-title');
   taskHeading.append(label);
 
-  const deleteAnchor = document.createElement('a');
+  const deleteAnchor: HTMLAnchorElement = document.createElement('a');
   deleteAnchor.classList.add('delete-task', 'spin');
 
   deleteAnchor.addEventListener('click', (evt): void => {
