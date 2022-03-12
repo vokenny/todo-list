@@ -7,7 +7,7 @@ export function TaskCard({
   title,
   notes,
   isDone,
-  creationDate,
+  dueDate,
   completedDate,
 }: Task): Node {
   const taskCard: HTMLDivElement = document.createElement('div');

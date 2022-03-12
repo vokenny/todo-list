@@ -14,7 +14,7 @@ export default class TaskItem implements Task {
   title: string;
   notes: string;
   isDone: boolean;
-  creationDate: string;
+  dueDate?: string | undefined;
   completedDate?: string | undefined;
 
   constructor(newTask: NewTask) {
@@ -22,6 +22,8 @@ export default class TaskItem implements Task {
     this.title = newTask.title;
     this.notes = newTask.notes;
     this.isDone = false;
-    this.creationDate = new Date().toDateString();
+    this.dueDate = newTask?.dueDate
+      ? new Date(newTask.dueDate).toDateString()
+      : undefined;
   }
 }

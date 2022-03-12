@@ -3,6 +3,6 @@ export default interface Task {
   title: string;
   notes: string;
   isDone: boolean;
-  creationDate: string;
+  dueDate?: string | undefined;
   completedDate?: string | undefined;
 }

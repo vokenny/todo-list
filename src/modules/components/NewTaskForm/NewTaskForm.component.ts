@@ -1,10 +1,19 @@
 import './new-task-form-style.css';
 import NewTask from '../../interfaces/NewTask';
 import { taskListVM } from '../../view-models/TaskListViewModel';
+import { FormValidator, InputValidator } from '../../interfaces/FormValidator';
 
 export default function NewTaskForm(): Node {
   const NEW_TASK_TITLE_ID: string = 'new-task-title';
   const NEW_TASK_NOTES_ID: string = 'new-task-notes';
+  const NEW_TASK_DATE_ID: string = 'new-task-date';
+
+  const titleInputSelector = () =>
+    document.querySelector(`#${NEW_TASK_TITLE_ID}`) as HTMLInputElement;
+  const notesInputSelector = () =>
+    document.querySelector(`#${NEW_TASK_NOTES_ID}`) as HTMLInputElement;
+  const dueDateInputSelector = () =>
+    document.querySelector(`#${NEW_TASK_DATE_ID}`) as HTMLInputElement;
 
   const title: HTMLHeadingElement = document.createElement('h1');
   title.textContent = 'Tasks';
@@ -27,62 +36,104 @@ export default function NewTaskForm(): Node {
   notesInput.maxLength = 1000;
   notesInput.placeholder = '(Optional) Add any notes to your task';
 
+  const dueDateInput: HTMLInputElement = document.createElement('input');
+  dueDateInput.id = NEW_TASK_DATE_ID;
+  dueDateInput.type = 'date';
+
   const formSubmit: HTMLButtonElement = document.createElement('button');
   formSubmit.id = 'new-task-form-submit';
   formSubmit.type = 'submit';
   formSubmit.textContent = 'Add new todo';
 
-  function sanitiseForm(
-    titleInput: HTMLInputElement,
-    notesInput: HTMLInputElement
-  ): NewTask {
-    const sanitisedTitle: string = titleInput.value.trim();
-    const sanitisedNotes: string = notesInput.value.trim();
+  function sanitiseForm(): NewTask {
+    const sanitisedTitle: string = titleInputSelector().value.trim();
+    const sanitisedNotes: string = notesInputSelector().value.trim();
+    const sanitisedDueDate: string = dueDateInputSelector().value;
 
     return {
       title: sanitisedTitle,
       notes: sanitisedNotes,
+      dueDate: sanitisedDueDate,
     };
   }
 
-  function validateForm({ title }: NewTask): boolean {
-    return !!title;
+  function validateForm({ title, dueDate }: NewTask): FormValidator {
+    let isValidDueDate: boolean = true; // by default it's not mandatory
+
+    if (dueDate) {
+      const today: string = new Date().toISOString().split('T')[0];
+      const dueDateFormatted: string = new Date(dueDate)
+        .toISOString()
+        .split('T')[0];
+
+      isValidDueDate = dueDateFormatted >= today;
+    }
+
+    return {
+      titleInput: {
+        field: titleInputSelector(),
+        isValid: !!title,
+      },
+      dueDateInput: {
+        field: dueDateInputSelector(),
+        isValid: isValidDueDate,
+      },
+    };
   }
 
-  function handleFormErrors(titleInput: HTMLInputElement) {
-    titleInput.classList.add('error');
+  function handleFormErrors(formValidator: FormValidator) {
+    Object.values(formValidator).forEach(
+      ({ field, isValid }: InputValidator) => {
+        if (!isValid) field.classList.add('error');
+      }
+    );
   }
 
-  function resetForm({ titleInput, notesInput }: any) {
-    titleInput.value = '';
-    notesInput.value = '';
-    titleInput.classList.remove('error');
+  function resetFormFields(): void {
+    [titleInputSelector, notesInputSelector, dueDateInputSelector].forEach(
+      (selector) => (selector().value = '')
+    );
+  }
+
+  function resetErrorStyling(): void {
+    titleInputSelector().classList.remove('error');
+    dueDateInputSelector().classList.remove('error');
+  }
+
+  function resetForm(): void {
+    resetFormFields();
+    resetErrorStyling();
   }
 
   function addNewTask(evt: any): void {
     evt.preventDefault();
 
-    const newTaskForm: HTMLFormElement = evt.target as HTMLFormElement;
-    const titleInput: HTMLInputElement = newTaskForm.querySelector(
-      `#${NEW_TASK_TITLE_ID}`
-    ) as HTMLInputElement;
+    resetErrorStyling();
 
-    const notesInput: HTMLInputElement = newTaskForm.querySelector(
-      `#${NEW_TASK_NOTES_ID}`
-    ) as HTMLInputElement;
+    const sanitisedForm: NewTask = sanitiseForm();
+    const formValidator: FormValidator = validateForm(sanitisedForm);
 
-    const sanitisedForm: NewTask = sanitiseForm(titleInput, notesInput);
-    const isValid: boolean = validateForm(sanitisedForm);
-
-    if (isValid) {
+    if (
+      Object.values(formValidator).every(
+        ({ isValid }: InputValidator) => isValid
+      )
+    ) {
       taskListVM.addTaskItem(sanitisedForm);
-      resetForm({ titleInput, notesInput });
+      resetForm();
+    } else {
+      handleFormErrors(formValidator);
+      resetFormFields();
     }
-
-    if (!isValid) handleFormErrors(titleInput);
   }
 
-  newTaskForm.append(title, titleInput, rule, notesInput, formSubmit);
+  newTaskForm.append(
+    title,
+    titleInput,
+    rule,
+    notesInput,
+    dueDateInput,
+    formSubmit
+  );
   newTaskForm.addEventListener('submit', (evt: any): void => addNewTask(evt));
 
   return newTaskForm;
