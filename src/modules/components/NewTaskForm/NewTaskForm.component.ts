@@ -40,6 +40,8 @@ export default function NewTaskForm(): Node {
   dueDateInput.id = NEW_TASK_DATE_ID;
   dueDateInput.type = 'date';
 
+  // TODO: add priority status
+
   const formSubmit: HTMLButtonElement = document.createElement('button');
   formSubmit.id = 'new-task-form-submit';
   formSubmit.type = 'submit';

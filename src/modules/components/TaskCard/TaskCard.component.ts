@@ -49,6 +49,8 @@ export function TaskCard({
     dueDateSubtitle.textContent = `Due: ${dueDate}`;
   }
 
+  // TODO: add priority status
+
   const rule: HTMLHRElement = document.createElement('hr');
 
   const taskNotes: HTMLParagraphElement = document.createElement('p');
