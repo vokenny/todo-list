@@ -43,7 +43,11 @@ export function TaskCard({
     if (taskId) taskListVM.deleteTaskItem(taskId);
   });
 
-  // TODO: Add a due date, and remove creation date
+  const dueDateSubtitle: HTMLSpanElement = document.createElement('span');
+  if (dueDate && dueDateSubtitle) {
+    dueDateSubtitle.classList.add('task-due-date');
+    dueDateSubtitle.textContent = `Due: ${dueDate}`;
+  }
 
   const rule: HTMLHRElement = document.createElement('hr');
 
@@ -59,6 +63,7 @@ export function TaskCard({
     checkbox,
     taskHeading,
     deleteAnchor,
+    dueDate ? dueDateSubtitle : null,
     notes ? rule : null,
     notes ? taskNotes : null,
     completedDate ? completionDate : null,

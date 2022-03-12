@@ -42,6 +42,10 @@
   content: '\00d7';
 }
 
+.task-due-date {
+  display: block;
+}
+
 .task-notes {
   word-wrap: break-word;
 }
