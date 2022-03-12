@@ -50,10 +50,23 @@ class TaskListViewModel {
     if (updatedTask) taskListView.updateSingleTask(updatedTask);
   }
 
+  deleteTaskItem(id: string) {
+    const updatedTaskItemList: TaskItem[] = this.getTaskItems().filter(
+      (task) => task.id !== id
+    );
+
+    this.#storage.setItem(
+      this.#TASK_LIST_KEY,
+      JSON.stringify(updatedTaskItemList)
+    );
+
+    taskListView.updateTaskList();
+  }
+
   deleteAllTaskItems(): void {
     this.#storage.removeItem(this.#TASK_LIST_KEY);
     taskListView.updateTaskList();
   }
 }
 
-export const taskListVM = new TaskListViewModel();
+export const taskListVM: TaskListViewModel = new TaskListViewModel();

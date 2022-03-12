@@ -34,6 +34,15 @@ export function TaskCard({
   taskHeading.classList.add('task-title');
   taskHeading.append(label);
 
+  const deleteAnchor = document.createElement('a');
+  deleteAnchor.classList.add('delete-task', 'spin');
+
+  deleteAnchor.addEventListener('click', (evt): void => {
+    const close: HTMLElement = evt.target as HTMLElement;
+    const taskId = close.parentElement?.getAttribute('data-id');
+    if (taskId) taskListVM.deleteTaskItem(taskId);
+  });
+
   // TODO: Add a due date, and remove creation date
 
   const rule: HTMLHRElement = document.createElement('hr');
@@ -49,6 +58,7 @@ export function TaskCard({
   const taskCardElems: HTMLSpanElement[] = [
     checkbox,
     taskHeading,
+    deleteAnchor,
     notes ? rule : null,
     notes ? taskNotes : null,
     completedDate ? completionDate : null,
