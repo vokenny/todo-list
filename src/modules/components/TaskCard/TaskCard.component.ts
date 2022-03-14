@@ -68,7 +68,7 @@ export function TaskCard({
   completionDate.classList.add('completed-date');
   if (completedDate) completionDate.textContent = `Completed: ${completedDate}`;
 
-  const taskCardElems: HTMLSpanElement[] = [
+  const taskCardElems: HTMLElement[] = [
     checkbox,
     taskHeading,
     deleteAnchor,
@@ -77,7 +77,7 @@ export function TaskCard({
     notes ? rule : null,
     notes ? taskNotes : null,
     completedDate ? completionDate : null,
-  ].filter((elem) => elem !== null) as HTMLSpanElement[];
+  ].filter((elem) => elem !== null) as HTMLElement[];
 
   taskCard.append(...taskCardElems);
   return taskCard;
