@@ -7,7 +7,8 @@
 }
 
 .new-task-form input,
-.new-task-form textarea {
+.new-task-form textarea,
+.new-task-form select {
   margin: 1em 0;
   padding: 0.5em;
   width: 100%;
@@ -17,6 +18,16 @@
   resize: vertical;
   min-height: 50px;
   max-height: 300px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+#new-task-date,
+#new-task-priority {
+  width: 40%;
 }
 
 .error {

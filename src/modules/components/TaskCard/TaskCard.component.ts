@@ -8,6 +8,7 @@ export function TaskCard({
   notes,
   isDone,
   dueDate,
+  priority,
   completedDate,
 }: Task): Node {
   const taskCard: HTMLDivElement = document.createElement('div');
@@ -49,7 +50,12 @@ export function TaskCard({
     dueDateSubtitle.textContent = `Due: ${dueDate}`;
   }
 
-  // TODO: add priority status
+  const priorityBadge: HTMLSpanElement = document.createElement('span');
+  priorityBadge.classList.add('task-badge');
+  if (priority) {
+    priorityBadge.classList.add(priority);
+    priorityBadge.textContent = priority.charAt(0).toUpperCase() + priority.slice(1);
+  }
 
   const rule: HTMLHRElement = document.createElement('hr');
 
@@ -65,6 +71,7 @@ export function TaskCard({
     checkbox,
     taskHeading,
     deleteAnchor,
+    priority ? priorityBadge : null,
     dueDate ? dueDateSubtitle : null,
     notes ? rule : null,
     notes ? taskNotes : null,

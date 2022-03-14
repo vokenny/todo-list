@@ -46,6 +46,29 @@
   display: block;
 }
 
+.task-badge {
+  margin: 1em;
+  float: right;
+  font-size: 0.75em;
+  font-weight: bold;
+  color: white;
+  padding: 0.35em 0.65em;
+  border-radius: 15px;
+  border: 1px solid white;
+}
+
+.high {
+  background-color: #bb3333;
+}
+
+.medium {
+  background-color: orange;
+}
+
+.low {
+  background-color: green;
+}
+
 .task-notes {
   word-wrap: break-word;
 }

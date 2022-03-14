@@ -7,6 +7,7 @@ export default function NewTaskForm(): Node {
   const NEW_TASK_TITLE_ID: string = 'new-task-title';
   const NEW_TASK_NOTES_ID: string = 'new-task-notes';
   const NEW_TASK_DATE_ID: string = 'new-task-date';
+  const NEW_TASK_PRIORITY_ID: string = 'new-task-priority';
 
   const titleInputSelector = () =>
     document.querySelector(`#${NEW_TASK_TITLE_ID}`) as HTMLInputElement;
@@ -14,6 +15,8 @@ export default function NewTaskForm(): Node {
     document.querySelector(`#${NEW_TASK_NOTES_ID}`) as HTMLInputElement;
   const dueDateInputSelector = () =>
     document.querySelector(`#${NEW_TASK_DATE_ID}`) as HTMLInputElement;
+  const prioritySelectSelector = () =>
+    document.querySelector(`#${NEW_TASK_PRIORITY_ID}`) as HTMLInputElement;
 
   const title: HTMLHeadingElement = document.createElement('h1');
   title.textContent = 'Tasks';
@@ -40,7 +43,25 @@ export default function NewTaskForm(): Node {
   dueDateInput.id = NEW_TASK_DATE_ID;
   dueDateInput.type = 'date';
 
-  // TODO: add priority status
+  const priorities: string[] = ['High', 'Medium', 'Low'];
+  const noSelectOpt: HTMLOptionElement = document.createElement('option');
+  noSelectOpt.value = '';
+  noSelectOpt.textContent = '(Optional) Priority';
+
+  const priorityOptions: HTMLOptionElement[] = priorities.map((priority) => {
+    const option = document.createElement('option');
+    option.value = priority.toLowerCase();
+    option.textContent = priority;
+    return option;
+  });
+
+  const prioritySelect: HTMLSpanElement = document.createElement('select');
+  prioritySelect.id = NEW_TASK_PRIORITY_ID;
+  prioritySelect.append(noSelectOpt, ...priorityOptions);
+
+  const row = document.createElement('div');
+  row.classList.add('row');
+  row.append(dueDateInput, prioritySelect);
 
   const formSubmit: HTMLButtonElement = document.createElement('button');
   formSubmit.id = 'new-task-form-submit';
@@ -51,11 +72,13 @@ export default function NewTaskForm(): Node {
     const sanitisedTitle: string = titleInputSelector().value.trim();
     const sanitisedNotes: string = notesInputSelector().value.trim();
     const sanitisedDueDate: string = dueDateInputSelector().value;
+    const sanitisedPriority: string = prioritySelectSelector().value;
 
     return {
       title: sanitisedTitle,
       notes: sanitisedNotes,
       dueDate: sanitisedDueDate,
+      priority: sanitisedPriority,
     };
   }
 
@@ -109,9 +132,8 @@ export default function NewTaskForm(): Node {
 
   function addNewTask(evt: any): void {
     evt.preventDefault();
-
     resetErrorStyling();
-
+    
     const sanitisedForm: NewTask = sanitiseForm();
     const formValidator: FormValidator = validateForm(sanitisedForm);
 
@@ -128,14 +150,7 @@ export default function NewTaskForm(): Node {
     }
   }
 
-  newTaskForm.append(
-    title,
-    titleInput,
-    rule,
-    notesInput,
-    dueDateInput,
-    formSubmit
-  );
+  newTaskForm.append(title, titleInput, rule, notesInput, row, formSubmit);
   newTaskForm.addEventListener('submit', (evt: any): void => addNewTask(evt));
 
   return newTaskForm;

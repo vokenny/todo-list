@@ -4,5 +4,6 @@ export default interface Task {
   notes: string;
   isDone: boolean;
   dueDate?: string | undefined;
+  priority?: string | undefined;
   completedDate?: string | undefined;
 }
