@@ -6,12 +6,11 @@
 
 .task-title {
   margin: 0.3em 0;
-  display: inline-block;
+  display: inline;
 }
 
 .checkbox {
-  margin: 0.8em;
-  margin-left: 0;
+  margin: 0.8em 0.8em 0 0;
   width: 1.5em;
   height: 1.5em;
 }
@@ -69,8 +68,9 @@
   background-color: green;
 }
 
+.task-title > label,
 .task-notes {
-  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .task-notes,

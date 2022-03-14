@@ -54,7 +54,8 @@ export function TaskCard({
   priorityBadge.classList.add('task-badge');
   if (priority) {
     priorityBadge.classList.add(priority);
-    priorityBadge.textContent = priority.charAt(0).toUpperCase() + priority.slice(1);
+    priorityBadge.textContent =
+      priority.charAt(0).toUpperCase() + priority.slice(1);
   }
 
   const rule: HTMLHRElement = document.createElement('hr');
