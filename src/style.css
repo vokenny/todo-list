@@ -10,6 +10,7 @@ body {
 }
 
 body {
+  overflow-y: scroll;
   font-family: 'Overpass Mono', monospace;
   padding: 1em;
   background-color: #8bc6ec;
