@@ -133,7 +133,7 @@ export default function NewTaskForm(): Node {
   function addNewTask(evt: any): void {
     evt.preventDefault();
     resetErrorStyling();
-    
+
     const sanitisedForm: NewTask = sanitiseForm();
     const formValidator: FormValidator = validateForm(sanitisedForm);
 
@@ -146,7 +146,6 @@ export default function NewTaskForm(): Node {
       resetForm();
     } else {
       handleFormErrors(formValidator);
-      resetFormFields();
     }
   }
 
